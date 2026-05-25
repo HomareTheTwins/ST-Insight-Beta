@@ -8,7 +8,7 @@
 const APP_NAME = "ST-Insight"
 
 // バージョン情報
-const APP_VERSION = "v0.29-Beta"	// service-workerのバージョンと合わせる
+const APP_VERSION = "v0.30-Beta"	// service-workerのバージョンと合わせる
 
 // フォア/バック不要ショット
 const noHandShots = new Set([
