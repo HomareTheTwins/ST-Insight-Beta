@@ -3,4 +3,3 @@ const APP_CONFIG = {
 	APP_VERSION: "v0.35",
 	ENV: "dev",
 	ENV_LABEL: "ST-Insight Dev"
-}
