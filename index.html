@@ -22,15 +22,19 @@
 		<!-- 試合設定 -->
 		<div id="setup">
 
-			<h3>味方</h3>
-			<input id="A1" placeholder="正クロス側">
-			<input id="A2" placeholder="逆クロス側">
+			<h4>味方</h4>
+			<div class="player-input-row">
+				<input id="A1" class="player-name-input" placeholder="正クロス側">
+				<input id="A2" class="player-name-input" placeholder="逆クロス側">
+			</div>
 
-			<h3>対戦相手</h3>
-			<input id="B1" placeholder="正クロス側">
-			<input id="B2" placeholder="逆クロス側">
+			<h4>対戦相手</h4>
+			<div class="player-input-row">
+				<input id="B1" class="player-name-input" placeholder="正クロス側">
+				<input id="B2" class="player-name-input" placeholder="逆クロス側">
+			</div>
 
-			<br><br>
+			<br>
 
 			ゲーム数
 
@@ -48,7 +52,7 @@
 
 			<br><br>
 
-			<button onclick="startMatch()">試合開始</button>
+			<button class="start-match-btn" onclick="startMatch()">試合開始</button>
 
 			<!-- 設定画面バージョン情報 -->
 			<div id="appInfo" class="beta-label"></div>
@@ -56,11 +60,11 @@
 			<!-- β版注意事項-->
 			 <div id="betaNotice" class="betaNotice hidden">
 				<strong>ST-Insight β版</strong><br>
-				現在、試験公開中です。不具合やご要望があれば、ThreadsまたはInstagramのDMからお知らせください。<br>
-				※入力データはこの端末のブラウザ内に保存されます。ブラウザのデータ削除や端末変更により消える場合があります。<br>
-				<a href="https://www.threads.com/@homare.the.twins?igshid=NTc4MTlwNjQ2YQ==" target="_blank" rel="noopener noreferrer">Threads</a>
-				/ 
+				現在、試験公開中です。不具合やご要望があれば、<br>
+				<a href="https://www.threads.com/@homare.the.twins?igshid=NTc4MTlwNjQ2YQ==" target="_blank" rel="noopener noreferrer">Threads</a>または
 				<a href="https://www.instagram.com/stinsight_app?igsh=cjJseGxvaTZ1bmxv&utm_source=qr/" target="_blank" rel="noopener noreferrer">Instagram</a>
+				のDMからお知らせください。<br>
+				※入力データはこの端末のブラウザ内に保存されます。ブラウザのデータ削除や端末変更により消える場合があります。<br>
 			</div>
 		</div> <!-- 設定画面 終了-->
 		
@@ -109,6 +113,7 @@
 			<!-- ショットボタン -->
 			<div class="shot-grid" id="shotButtons"></div>
 
+			<!-- 得点履歴やショット集計等 -->
 			<div class="stats-row">
 				<div class="stats-block history">
 					<!-- 得点履歴 -->
@@ -129,6 +134,57 @@
 				</div>
 			</div>
 
+			<!-- 試合分析 -->
+			<div class="stats-block analysis">
+				<button class="stat-btn" onclick="toggleAnalysis()">試合分析</button>
+
+				<div id="analysisArea" class="stat-area hidden">
+
+					<!-- 試合結果 -->
+					<div id="analysisMatchResult"></div>
+
+					<!-- 分析タブ -->
+					<div class="analysis-tabs">
+						<button id="analysisTabSummary"
+								class="analysisTab active"
+								onclick="switchAnalysisTab('summary')">
+							サマリー
+						</button>
+
+						<button id="analysisTabGraph"
+								class="analysisTab"
+								onclick="switchAnalysisTab('graph')">
+							グラフ
+						</button>
+
+						<button id="analysisTabServe"
+								class="analysisTab"
+								onclick="switchAnalysisTab('serve')">
+							準備中
+						</button>
+					</div>
+
+					<!-- チーム切替 -->
+					<div class="analysis-team-tabs">
+						<button id="analysisTeamA"
+								class="analysisTeamTab active"
+								onclick="switchAnalysisTeam('A')">
+							味方
+						</button>
+
+						<button id="analysisTeamB"
+								class="analysisTeamTab"
+								onclick="switchAnalysisTeam('B')">
+							対戦相手
+						</button>
+					</div>
+
+					<!-- コンテンツ -->
+					<div id="analysisContent"></div>
+
+				</div>
+			</div>
+
 			<!-- 次の試合ボタン -->
 			<div style="text-align:center;margin-top:20px;">
 				<button id="nextMatchBtn" class="hidden" onclick="nextMatch()">次の試合</button>
@@ -136,11 +192,16 @@
 			
 		</div> <!-- 試合中画面 終了-->
 
+	<!-- ToDo★★★ chart.js,pluginは公開時にはローカル配置する -->
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 		<script src="js/config.js" defer></script>
+		<script src="js/settings.js" defer></script>
 		<script src="js/state.js" defer></script>
 		<script src="js/serve.js" defer></script>
 		<script src="js/history.js" defer></script>
 		<script src="js/ui.js" defer></script>
+		<script src="js/analysis.js" defer></script>
 		<script src="js/app.js" defer></script>
 		
 		<script>

@@ -1,6 +1,6 @@
 window.APP_CONFIG = {
-	APP_NAME: "ST-Insight Beta",
-	APP_VERSION: "v0.9.2",
-	ENV: "beta",
-	ENV_LABEL: "ST-Insight Beta"
+	APP_NAME: "ST-Insight Dev",
+	APP_VERSION: "v1.2.0",
+	ENV: "dev",
+	ENV_LABEL: "ST-Insight Dev"
 }

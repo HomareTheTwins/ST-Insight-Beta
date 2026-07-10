@@ -68,9 +68,14 @@ let state={
 	
 	/* UI状態管理 */
 	ui: {
-		openPlayers: {},	// 選手ごとの開閉状態
-		openPair: false,	// ペア分析の開閉状態
-		showAllShots: false	// 全ショット表示
+		openPlayers: {},		// 選手ごとの開閉状態
+		openPair: false,		// ペア分析の開閉状態
+		showAllShots: false,	// 全ショット表示
+
+		analysis:{
+			tab: "summary",		// 分析タブ
+			team: "A"			// 分析対象チーム
+		},
 	},
 	
 	/* ゲーム終了フラグ */

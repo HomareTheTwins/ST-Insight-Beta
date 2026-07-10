@@ -62,8 +62,8 @@ const MISS_TYPE_LABELS = {
 const COURSE_LABELS = {
 	cross: "クロス",
 	reverseCross: "逆クロス",
-	straight: "ストレート",
 	center: "センター",
+	straight: "ストレート",
 	short: "ショート",
 	skipped: "スキップ"
 }
@@ -278,15 +278,11 @@ function cancelHand(){
    コース選択処理
    ===================================================== */
 function selectCourse(course){
-	console.log("selectCourse:", course)
-	console.log("state.pendingShot:", state.pendingShot)
 	if(!state.pendingShot) return
 
 	state.pendingShot.course = course
 
-	console.log("削除前:", document.getElementById("courseOverlay"))
 	removeCourseChoice()
-	console.log("削除後:", document.getElementById("courseOverlay"))
 
 	recordShot(
 		state.pendingShot.shotKey,
@@ -594,6 +590,9 @@ function winGame(team){
 	state.service=state.service === "A" ? "B" : "A"
 	buildServerRotation()
 
+	// サーバー変更時に現在のサーバーを選択状態にする
+	selectPlayer(state.currentServer)
+
 	checkGameSet()
 }
 
@@ -635,12 +634,17 @@ function checkGameSet(){
 	・「次の試合」ボタンを表示
 ===================================================== */
 function finishMatch(winner){
-
 	state.matchFinished = true;
-	
+
 	updateUI()
 
-	alert("試合終了");	// ★ToDo 将来、勝利チームとスコアを表示するように変更
+	if(appSettings.showAnalysis !== false){
+		// 試合分析表示
+		showMatchAnalysis()
+	}else{
+		alert("試合終了")
+	}
+	
 }
 
 /* =====================================================
@@ -653,6 +657,8 @@ function finishMatch(winner){
 	・「次の試合」ボタンを再度非表示
 ===================================================== */
 function nextMatch(){
+	// 試合分析ブロックの非表示
+	hideMatchAnalysis()
 
 	saveOwnPlayerNames()
 	localStorage.removeItem("stInsightState")
@@ -995,6 +1001,7 @@ function setupEventHandlers(){
 }
 
 function init(){
+	loadAppSettings()
 	// 状態復元
 	loadState()
 

@@ -1,8 +1,8 @@
 {
-  "name": "ST-Insight Beta",
-  "short_name": "ST-Insight Beta",
-  "start_url": "/ST-Insight-Beta/index.html",
-  "scope": "/ST-Insight-Beta/",
+  "name": "ST-Insight Dev",
+  "short_name": "ST-Insight Dev",
+  "start_url": "/ST-Insight-Dev/index.html",
+  "scope": "/ST-Insight-Dev/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4CAF50",

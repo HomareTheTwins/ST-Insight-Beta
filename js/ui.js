@@ -185,17 +185,17 @@ function displayForNextGame(){
 		nextMatchBtn.classList.toggle("hidden", !isFinished)
 	}
 
-	/* 試合終了時だけ得点履歴を閉じる */
-	const historyArea = document.getElementById("historyArea")
-	if(isFinished){
-		if(historyArea){
-			historyArea.classList.add("hidden")
-		}
-	}else{
-		if(historyArea){
-			historyArea.classList.remove("hidden")
-		}
-	}
+	/* 試合終了時だけ得点履歴を閉じる */	// ★ 勝手に閉じると得点更新時（updateUI）に毎回表示されるので撤回
+	// const historyArea = document.getElementById("historyArea")
+	// if(isFinished){
+	// 	if(historyArea){
+	// 		historyArea.classList.add("hidden")
+	// 	}
+	// }else{
+	// 	if(historyArea){
+	// 		historyArea.classList.remove("hidden")
+	// 	}
+	// }
 }
 
 /* =====================================================
@@ -513,8 +513,8 @@ function removeHandChoice(){
 const courseOptions = [
 	{ key: "cross", label: "クロス" },
 	{ key: "reverseCross", label: "逆クロス" },
-	{ key: "straight", label: "ストレート" },
 	{ key: "center", label: "センター" },
+	{ key: "straight", label: "ストレート" },
 	{ key: "short", label: "ショート" }
 ]
 
@@ -540,8 +540,8 @@ function showCourseChoice(){
 
 			<button class="popup-btn btn-course-cross" id="btnCourseCross">クロス</button>
 			<button class="popup-btn btn-course-reverse" id="btnCourseReverse">逆クロス</button>
-			<button class="popup-btn btn-course-straight" id="btnCourseStraight">ストレート</button>
 			<button class="popup-btn btn-course-center" id="btnCourseCenter">センター</button>
+			<button class="popup-btn btn-course-straight" id="btnCourseStraight">ストレート</button>
 			<button class="popup-btn btn-course-short" id="btnCourseShort">ショート</button>
 			<button class="popup-btn btn-course-skip" id="btnCourseSkip">スキップ</button>
 			<button class="popup-btn btn-cancel" id="btnCourseCancel">戻る</button>
@@ -557,11 +557,11 @@ function showCourseChoice(){
 	document.getElementById("btnCourseReverse").onclick =
 		()=>selectCourse("reverseCross")
 
-	document.getElementById("btnCourseStraight").onclick =
-		()=>selectCourse("straight")
-
 	document.getElementById("btnCourseCenter").onclick =
 		()=>selectCourse("center")
+
+	document.getElementById("btnCourseStraight").onclick =
+		()=>selectCourse("straight")
 
 	document.getElementById("btnCourseShort").onclick =
 		()=>selectCourse("short")
@@ -909,6 +909,7 @@ function updateUI(){
 	updateUndoButton()
 	updateWindButtons()
 
+	updateMatchAnalysisVisibility()
 	displayForNextGame()
 
 	// 状態を保存

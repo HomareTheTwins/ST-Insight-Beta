@@ -1,4 +1,4 @@
-const CACHE_NAME = "ST-Insight-public-fkb3110-v1.10";
+const CACHE_NAME = "ST-Insight-public-fkb3110-v1.2.0";
 const BASE_PATH = "/ST-Insight-FKB3110/";
 
 const urlsToCache = [

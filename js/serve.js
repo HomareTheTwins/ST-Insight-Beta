@@ -73,6 +73,9 @@ function advanceServer() {
 	}
 
 	state.currentServer = state.serverRotation[state.serveIndex]
+
+	// サーバー変更時に現在のサーバーを選択状態にする
+	selectPlayer(state.currentServer)
 }
 
 /* =====================================================
@@ -144,7 +147,6 @@ function serveFault() {
 		state.serveStats[server].secondTotal++
 
 		// 得点処理
-		//recordError("ダブルフォルト") recordErrorを使用すると2重でpushStateされるため
 		let scoredTeam = server.startsWith("A") ? "B" : "A"
 		if (scoredTeam === "A") {
 			state.score.pointA++
@@ -170,14 +172,8 @@ function serveFault() {
 			// ゲーム終了なのでインデックス初期化
 			state.serveIndex = 0
 		}
-		//createShotButtons()]
 		updateUI()
 	}
-
-	//updateServeButton()
-
-	// サービススタッツ更新
-	//renderServeStats()
 }
 
 /* =====================================================

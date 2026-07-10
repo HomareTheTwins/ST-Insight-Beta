@@ -22,6 +22,79 @@ button{
 		box-shadow .15s ease;
 }
 
+/* 選手名入力欄 */
+#setup h4{
+	margin:10px 0 4px;
+}
+
+.player-input-row{
+	display:flex;
+	gap:8px;
+	margin-bottom:10px;
+}
+
+.player-name-input{
+	flex:1;
+	min-width:0;
+
+	font-size:16px;
+	padding:10px 12px;
+	min-height:42px;
+	box-sizing:border-box;
+
+	border:1px solid #ccc;
+	border-radius:8px;
+}
+
+.player-name-input::placeholder{
+	font-size:15px;
+	color:#999;
+}
+
+/* 試合開始ボタン */
+.start-match-btn{
+	width:100%;
+	margin-top:12px;
+	padding:12px 16px;
+
+	border:none;
+	border-radius:10px;
+
+	background:linear-gradient(
+		180deg,
+		#35d3c5 0%,
+		#2ec4b6 100%
+	);
+	color:white;
+
+	font-size:16px;
+	font-weight:bold;
+
+	box-shadow:
+		0 2px 0 #1f9f95,
+		0 3px 6px rgba(0,0,0,0.12);
+
+	cursor:pointer;
+
+	transition:
+		transform .05s ease,
+		box-shadow .05s ease,
+		filter .15s ease;
+}
+
+@media (hover:hover){
+	.start-match-btn:hover{
+		filter:brightness(1.03);
+	}
+}
+
+.start-match-btn:active{
+	transform:translateY(2px);
+
+	box-shadow:
+		0 1px 0 #1f9f95,
+		0 2px 4px rgba(0,0,0,0.14);
+}
 /* バージョン情報 */
 #appInfo {
 	text-align: center;
@@ -472,11 +545,13 @@ button{
 		transform .05s ease;
 }
 
-.popup-btn:hover{
-	background:#e3e8eb;
+@media (hover:hover){
+	.popup-btn:hover{
+		background:#e3e8eb;
 
-	box-shadow:
-		0 2px 4px rgba(0,0,0,0.12);
+		box-shadow:
+			0 2px 4px rgba(0,0,0,0.12);
+	}
 }
 
 .popup-btn:active{
@@ -960,6 +1035,76 @@ button{
 	color: #666;
 }
 
+/* 試合分析ブロック */
+/* 試合分析 */
+.analysis{
+	margin-top:8px;
+	width:100%;
+}
+
+.analysis .stat-btn{
+	background:#c8f7ec;
+}
+
+.analysis .stat-area{
+	background:#f0fffb;
+	border:1px solid #b8e6dc;
+}
+
+.analysis .stat-area.hidden{
+	display:none !important;
+}
+
+.analysis-section{
+	margin-bottom:10px;
+}
+
+.analysis-section h4{
+	margin:6px 0 4px;
+	font-size:13px;
+}
+
+.analysis-section ul{
+	margin:0;
+	padding-left:18px;
+}
+
+.analysis-section li{
+	margin-bottom:3px;
+}
+
+.analysis-match-result{
+	text-align:center;
+	font-size:1.1em;
+	font-weight:bold;
+	padding:0 0 10px;
+}
+
+.analysis-match-result .score{
+	margin:0 12px;
+}
+
+.analysis-team-tabs{
+	display:grid;
+	grid-template-columns:1fr 1fr;
+	gap:6px;
+	margin:8px 0 10px;
+}
+
+.analysis-team-tabs button{
+	padding:8px 10px;
+	border:none;
+	border-radius:8px;
+	background:#e9ecef;
+	color:#455a64;
+	font-weight:bold;
+}
+
+.analysis-team-tabs button.active{
+	background:#2ec4b6;
+	color:white;
+}
+
 /* 次の試合ボタン */
 #nextMatchBtn {
 	font-size: 18px;
@@ -998,6 +1143,112 @@ button{
 	user-select:none;
 
 	opacity:0.8;
+}
+
+/* 分析タブ用 */
+/* =========================
+   試合分析 タブ
+   ========================= */
+
+.analysis-tabs {
+	display: flex;
+	gap: 4px;
+	margin-bottom: 10px;
+}
+
+.analysisTab {
+	flex: 1;
+	padding: 8px 4px;
+
+	border: 1px solid #9BEBD8;
+	border-radius: 8px;
+
+	background: #E8FBF6;
+	color: #16705B;
+
+	font-size: 14px;
+
+	cursor: pointer;
+}
+
+.analysisTab.active {
+	background: #5ee7c7;
+	color: white;
+	border-color: #42D6B2;
+	font-weight:bold;
+}
+
+/* =========================
+   分析対象チーム切替
+   ========================= */
+.analysis-team-tabs {
+	display:flex;
+	justify-content:center;
+	gap:8px;
+	margin:10px 0;
+}
+
+.analysisTeamTab {
+	padding:6px 20px;
+	border:1px solid #ccc;
+	border-radius:20px;
+	background:#fff;
+	cursor:pointer;
+	font-size:14px;
+}
+
+.analysisTeamTab.active {
+	background:#2196F3;
+	color:white;
+	border-color:#2196F3;
+}
+
+/* =========================
+   分析内容
+   ========================= */
+#analysisContent {
+	margin-top:10px;
+}
+
+.analysis-section {
+	margin-bottom:15px;
+	padding:10px;
+	border-radius:8px;
+	background:#fafafa;
+	border:1px solid #ddd;
+}
+
+.analysis-section h4 {
+	margin-top:0;
+	margin-bottom:8px;
+	font-size:15px;
+}
+
+/* =========================
+   グラフ
+   ========================= */
+.analysis-section canvas {
+	max-width:100%;
+	height:auto !important;
+}
+
+.chart-container {
+	position:relative;
+	width:100%;
+	max-width:320px;
+	margin:0 auto;
+}
+
+@media screen and (max-width:600px){
+	.analysisTab {
+		font-size:13px;
+		padding:7px 2px;
+	}
+
+	.analysisTeamTab {
+		padding:6px 15px;
+		font-size:13px;
+	}
 }
 
 /* ダブルタップ時の拡大防止 */
