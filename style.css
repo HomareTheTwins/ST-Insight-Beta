@@ -594,10 +594,16 @@ button{
 	border:1px solid #90caf9;
 }
 
-.btn-course-straight{
+.btn-course-rightStraight{
 	background:#fff3cd;
 	color:#664d03;
 	border:1px solid #ffecb5;
+}
+
+.btn-course-leftStraight{
+	background:#e9d4f7;
+	color:#664d03;
+	border:1px solid #ffb5fb;
 }
 
 .btn-course-center{

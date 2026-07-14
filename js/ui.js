@@ -321,8 +321,8 @@ const detailShotsBase = [
 	{key:"stroke",		type:"shot-back"},
 	{key:"lob",			type:"shot-back"},
 	{key:"midLob",		type:"shot-back"},
-	{key:"shortCross",	type:"shot-back"},
 
+	{key:"short",		type:"shot-common"},
 	{key:"passing",		type:"shot-common"},
 	{key:"attack",		type:"shot-common"},
 	{key:"slice",		type:"shot-common"},
@@ -342,8 +342,8 @@ const simpleShotsBase = [
 	{key:"ace",			type:"shot-back"},
 	{key:"stroke",		type:"shot-back"},
 	{key:"lob",			type:"shot-back"},
-	{key:"shortCross",	type:"shot-back"},
 
+	{key:"short",		type:"shot-common"},
 	{key:"attack",		type:"shot-common"},
 	{key:"drop",		type:"shot-common"},
 
@@ -386,8 +386,8 @@ const detailMissShotsBase = [
 	{key:"stroke",		type:"error-back"},
 	{key:"lob",			type:"error-back"},
 	{key:"midLob",		type:"error-back"},
-	{key:"shortCross",	type:"error-back"},
 
+	{key:"short",		type:"error-common"},
 	{key:"passing",		type:"error-common"},
 	{key:"attack",		type:"error-common"},
 	{key:"slice",		type:"error-common"},
@@ -409,8 +409,8 @@ const simpleMissShotsBase = [
 
 	{key:"stroke",		type:"error-back"},
 	{key:"lob",			type:"error-back"},
-	{key:"shortCross",	type:"error-back"},
 
+	{key:"short",		type:"error-common"},
 	{key:"attack",		type:"error-common"},
 	{key:"drop",		type:"error-common"},
 	
@@ -514,8 +514,9 @@ const courseOptions = [
 	{ key: "cross", label: "クロス" },
 	{ key: "reverseCross", label: "逆クロス" },
 	{ key: "center", label: "センター" },
-	{ key: "straight", label: "ストレート" },
-	{ key: "short", label: "ショート" }
+	{ key: "rightStraight", label: "右ストレート" },
+	{ key: "leftStraight", label: "左ストレート" }
+	// { key: "short", label: "ショート" }
 ]
 
 /* =====================================================
@@ -541,8 +542,8 @@ function showCourseChoice(){
 			<button class="popup-btn btn-course-cross" id="btnCourseCross">クロス</button>
 			<button class="popup-btn btn-course-reverse" id="btnCourseReverse">逆クロス</button>
 			<button class="popup-btn btn-course-center" id="btnCourseCenter">センター</button>
-			<button class="popup-btn btn-course-straight" id="btnCourseStraight">ストレート</button>
-			<button class="popup-btn btn-course-short" id="btnCourseShort">ショート</button>
+			<button class="popup-btn btn-course-rightStraight" id="btnCourseRightStraight">右ストレート</button>
+			<button class="popup-btn btn-course-leftStraight" id="btnCourseLeftStraight">左ストレート</button>
 			<button class="popup-btn btn-course-skip" id="btnCourseSkip">スキップ</button>
 			<button class="popup-btn btn-cancel" id="btnCourseCancel">戻る</button>
 
@@ -560,11 +561,14 @@ function showCourseChoice(){
 	document.getElementById("btnCourseCenter").onclick =
 		()=>selectCourse("center")
 
-	document.getElementById("btnCourseStraight").onclick =
-		()=>selectCourse("straight")
+	document.getElementById("btnCourseRightStraight").onclick =
+		()=>selectCourse("rightStraight")
 
-	document.getElementById("btnCourseShort").onclick =
-		()=>selectCourse("short")
+	document.getElementById("btnCourseLeftStraight").onclick =
+		()=>selectCourse("leftStraight")
+
+	// document.getElementById("btnCourseShort").onclick =
+	// 	()=>selectCourse("short")
 
 	document.getElementById("btnCourseSkip").onclick =
 		()=>selectCourse("skipped")

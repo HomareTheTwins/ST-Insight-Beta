@@ -20,8 +20,9 @@ const COURSE_ORDER = [
 	"cross",
 	"reverseCross",
 	"center",
-	"straight",
-	"short"
+	"rightStraight",
+	"leftStraight"
+	// "short"
 ]
 
 // 除外対象
@@ -35,36 +36,28 @@ function toggleAnalysis(){
 	const analysisArea = document.getElementById("analysisArea")
 	if(!analysisArea) return
 
-	analysisArea.classList.toggle("hidden")
-}
-
-function hideMatchAnalysis(){
-
-	const analysisArea = document.getElementById("analysisArea")
-	if(!analysisArea) return
-
-	analysisArea.classList.add("hidden")
-	analysisArea.innerHTML = ""
+	if(analysisArea.classList.contains("hidden")){
+		showMatchAnalysis()
+		analysisArea.classList.remove("hidden")
+	}else{
+		analysisArea.classList.add("hidden")
+	}
 }
 
 function showMatchAnalysis(){
-	// 試合分析機能OFFの場合は計算・表示しない
+ 	// 試合分析機能OFFの場合は計算・表示しない
 	if(appSettings.showAnalysis === false){
 		return
 	}
-
 	const analysisArea = document.getElementById("analysisArea")
 	if(!analysisArea) return
 
 	currentMatchAnalysis = buildMatchAnalysis()
-
 	// 分析画面初期状態
 	state.ui.analysis.tab = "summary"
 	state.ui.analysis.team = "A"
 
-	//analysisArea.classList.remove("hidden")
 	renderMatchAnalysis(currentMatchAnalysis)
-
 	setTimeout(() => {
 		analysisArea.scrollIntoView({
 			behavior: "smooth",
@@ -72,6 +65,17 @@ function showMatchAnalysis(){
 		})
 	}, 100)
 }
+
+function hideMatchAnalysis(){
+	const analysisArea = document.getElementById("analysisArea")
+	if(!analysisArea) return
+
+	analysisArea.classList.add("hidden")
+
+	document.getElementById("analysisMatchResult").innerHTML = ""
+	document.getElementById("analysisContent").innerHTML = ""
+}
+
 function updateMatchAnalysisVisibility(){
 
     const area = document.getElementById("analysisArea")
@@ -597,7 +601,22 @@ function buildMissTypeComment(summary){
     return ""
 }
 
+// デバッグ用
+function debugLog(message){
+
+	const area = document.getElementById("debugArea")
+	if(area){
+		area.textContent += message + "\n"
+	}
+
+	console.log(message)
+}
+
 function renderMatchAnalysis(analysis){
+	// debugLog("----- renderMatchAnalysis -----")
+	// debugLog("analysisArea=" + !!document.getElementById("analysisArea"))
+	// debugLog("analysisMatchResult=" + !!document.getElementById("analysisMatchResult"))
+	// debugLog("analysisContent=" + !!document.getElementById("analysisContent"))
 
 	currentMatchAnalysis = analysis
 
@@ -610,11 +629,22 @@ function renderMatchAnalysis(analysis){
 	renderAnalysisContent()
 }
 
-function buildMatchResultHtml(analysis){
+function updateAnalysisButton(){
+	const btn = document.getElementById("analysisToggleBtn")
+	if(!btn) return
 
+	if(state.matchFinished){
+		btn.textContent = "試合分析"
+	}else{
+		btn.textContent = "途中分析"
+	}
+}
+
+function buildMatchResultHtml(analysis){
+	const title = state.matchFinished ? "試合結果" : "途中経過"
 	return `
 		<div class="analysis-section">
-			<h4>試合結果</h4>
+			<h4>${title}</h4>
 			<div class="analysis-match-result">
 				<span>${analysis.result.teamAName}</span>
 				<span class="score">
@@ -627,7 +657,6 @@ function buildMatchResultHtml(analysis){
 }
 
 function switchAnalysisTeam(team){
-console.log(state.ui)
 	state.ui.analysis.team = team
 
 	updateAnalysisTeamTabs()
@@ -636,15 +665,7 @@ console.log(state.ui)
 }
 
 function updateAnalysisTeamTabs(){
-	console.log(
-		"analysisTeamA:",
-		document.getElementById("analysisTeamA")
-	)
 
-	console.log(
-		"analysisTeamB:",
-		document.getElementById("analysisTeamB")
-	)
 	document.getElementById("analysisTeamA")
 		.classList.toggle(
 			"active",
@@ -965,6 +986,9 @@ function drawScoreShotChart(summary){
 		count
 	)
 
+	const chartHeight = Math.max(220, labels.length * 28)
+	ctx.parentElement.style.height = `${chartHeight}px`
+	
 	scoreShotChart = new Chart(ctx, {
 		type:"bar",
 
@@ -992,6 +1016,12 @@ function drawScoreShotChart(summary){
 					suggestedMax: Math.max(...values) + 2,
 					ticks:{
 						stepSize:1
+					}
+				},
+
+				y:{
+					ticks:{
+						autoSkip:false
 					}
 				}
 			},
@@ -1048,6 +1078,9 @@ function drawMissShotChart(summary){
 		count
 	)
 
+	const chartHeight = Math.max(220, labels.length * 28)
+	ctx.parentElement.style.height = `${chartHeight}px`
+
 	missShotChart = new Chart(ctx, {
 		type:"bar",
 
@@ -1074,6 +1107,12 @@ function drawMissShotChart(summary){
 					suggestedMax:Math.max(...values) + 2,
 					ticks:{
 						stepSize:1
+					}
+				},
+
+				y:{
+					ticks:{
+						autoSkip:false
 					}
 				}
 			},
@@ -1144,16 +1183,16 @@ function drawScoreCourseChart(summary){
 					backgroundColor:[
 						"#81c784", // クロス（緑）
 						"#64b5f6", // 逆クロス（青）
-						"#ffd54f", // ストレート（黄）
 						"#f48fb1", // センター（ピンク）
-						"#9575cd"  // ショート（紫）
+						"#ffd54f", // 右ストレート（黄）
+						"#9575cd"  // 左ストレート（紫）
 					],
 
 					borderColor:[
 						"#4caf50",
 						"#2196f3",
-						"#ffc107",
 						"#ec407a",
+						"#ffc107",
 						"#7e57c2"
 					],
 

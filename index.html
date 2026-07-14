@@ -136,7 +136,7 @@
 
 			<!-- 試合分析 -->
 			<div class="stats-block analysis">
-				<button class="stat-btn" onclick="toggleAnalysis()">試合分析</button>
+				<button id="analysisToggleBtn" class="stat-btn" onclick="toggleAnalysis()">途中分析</button>
 
 				<div id="analysisArea" class="stat-area hidden">
 
@@ -191,6 +191,13 @@
 			</div>
 			
 		</div> <!-- 試合中画面 終了-->
+
+		<!-- デバッグ用 -->
+		 <!-- <div id="debugArea"
+			style="white-space:pre-wrap;
+					font-size:12px;
+					color:red;">
+		</div> -->
 
 	<!-- ToDo★★★ chart.js,pluginは公開時にはローカル配置する -->
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

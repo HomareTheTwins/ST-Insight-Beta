@@ -25,7 +25,7 @@ const SHOT_LABELS = {
 	stroke: "ストローク",
 	lob: "ロブ",
 	midLob: "中ロブ",
-	shortCross: "ショートクロス",
+	short: "ショート",
 
 	passing: "パッシング",
 	attack:	"前衛アタック",
@@ -63,8 +63,9 @@ const COURSE_LABELS = {
 	cross: "クロス",
 	reverseCross: "逆クロス",
 	center: "センター",
-	straight: "ストレート",
-	short: "ショート",
+	rightStraight: "右ストレート",
+	leftStraight: "左ストレート",
+	// short: "ショート",
 	skipped: "スキップ"
 }
 
@@ -636,6 +637,9 @@ function checkGameSet(){
 function finishMatch(winner){
 	state.matchFinished = true;
 
+	// 試合分析トグルボタンの表示変更
+	updateAnalysisButton()
+
 	updateUI()
 
 	if(appSettings.showAnalysis !== false){
@@ -1013,6 +1017,7 @@ function init(){
 
 		createScoreboard()
 		initPlayers()
+		updateAnalysisButton()
 		updateUI()
 	}else{
 		loadOwnPlayerNames()
